@@ -6,6 +6,7 @@ init:
 	@echo ""
 	@echo "...Fetching Vundle"
 	@git submodule init
+	@git submodule update
 	@echo "...Relinking .vimrc"
 	@ln -sf `pwd`/vimrc ~/.vimrc
 	@echo "...Installing plugins"
