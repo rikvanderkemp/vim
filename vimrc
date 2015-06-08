@@ -45,6 +45,8 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'scrooloose/syntastic'
 Plugin 'vimwiki/vimwiki'
 Plugin 'docteurklein/vim-symfony'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'craigemery/vim-autotag'
 
 call vundle#end()
 
@@ -237,4 +239,13 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_php_checkers = ["php", "phpcs"] 
 let g:syntastic_php_phpcs_args = "--standard=Symfony2"
+
+
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
+noremap <Leader>u :call PhpInsertUse()<CR>
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
 
