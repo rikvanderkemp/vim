@@ -41,7 +41,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vimwiki/vimwiki'
 Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'craigemery/vim-autotag'
+
+" Disabled causes performance issues
+" Plugin 'craigemery/vim-autotag'
+
 Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
@@ -103,12 +106,19 @@ nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 noremap <Leader>u :call PhpInsertUse()<CR>
 inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
 
+map <leader><leader>n :set relativenumber!<CR>
+
+" Remove trailing whitespace http://vim.wikia.com/wiki/Remove_unwanted_space
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " I like line numbers
 set number
+set relativenumber
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
