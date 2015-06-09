@@ -1,9 +1,4 @@
-" VIMRC partially taken from:  https://amix.dk/vim/vimrc.html
-
-" Alternative package manager 
-" execute pathogen#infect() 
-
-
+" VIMRC inspiration from:  https://amix.dk/vim/vimrc.html
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins using Vundle 
@@ -53,13 +48,6 @@ call vundle#end()
 
 filetype plugin indent on
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin -> Pdv 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
-nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -73,6 +61,21 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+syntax on
+
+colorscheme monokai
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Key Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -84,25 +87,25 @@ nmap <leader>w :w!<cr>
 " Pdv snippet shortcut
 nmap <leader>d :call pdv#DocumentWithSnip()<CR>
 
+" Opens NERDTree at item
 nmap <leader><leader>. :NERDTreeFind<CR>
 nmap <leader><leader>o o<Esc>
 nmap <leader><leader>O O<Esc>
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+" Working with Tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
 
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
-syntax on
-
-colorscheme monokai
-
-au BufRead,BufNewFile *.twig set filetype=htmljinja
+noremap <Leader>u :call PhpInsertUse()<CR>
+inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " I like line numbers
 set number
@@ -115,7 +118,6 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -150,7 +152,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -178,10 +179,6 @@ set wrap "Wrap lines
 " => Moving around, tabs, windows and buffers
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,7 +188,37 @@ set laststatus=2
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" Extend expand-selection
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.twig set filetype=htmljinja
+au BufRead,BufNewFile *.wiki set tw=80
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_php_checkers = ["php", "phpcs"] 
+let g:syntastic_php_phpcs_args = "--standard=Symfony2"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin -> Pdv 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Functions and checks :-)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Extend expand-selection behaviour like PHPStorm
 call expand_region#custom_text_objects({
       \ 'a]' :1,
       \ 'ab' :1,
@@ -199,6 +226,18 @@ call expand_region#custom_text_objects({
       \ 'ii' :0,
       \ 'ai' :0, 
       \ })
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
+
+if has("gui_running")
+    if has("gui_macvim") 
+        set guifont=Monaco:h18
+        set guioptions-=L
+    endif
+endif
 
 function! HasPaste()
     if &paste
@@ -217,42 +256,3 @@ function! PhpSyntaxOverride()
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-au BufRead,BufNewFile *.twig set filetype=htmljinja
-au BufRead,BufNewFile *.wiki set tw=80
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntastic 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_php_checkers = ["php", "phpcs"] 
-let g:syntastic_php_phpcs_args = "--standard=Symfony2"
-
-
-inoremap <Leader>u <C-O>:call PhpInsertUse()<CR>
-noremap <Leader>u :call PhpInsertUse()<CR>
-
-if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
-
-if has("gui_running")
-    if has("gui_macvim") 
-        set guifont=Monaco:h18
-        set guioptions-=L
-    endif
-endif
