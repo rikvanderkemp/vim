@@ -47,6 +47,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'craigemery/vim-autotag'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 
@@ -249,3 +250,9 @@ if executable("ag")
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
+if has("gui_running")
+    if has("gui_macvim") 
+        set guifont=Monaco:h18
+        set guioptions-=L
+    endif
+endif
