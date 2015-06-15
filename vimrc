@@ -1,7 +1,7 @@
 " VIMRC inspiration from:  https://amix.dk/vim/vimrc.html
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins using Vundle 
+" => Plugins using Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Required by Vundle
 set nocompatible
@@ -30,6 +30,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'adoy/vim-php-refactoring-toolbox'
 
 " Testing syntastic, disabled this on
 " Plugin 'joonty/vim-phpqa.git'
@@ -41,6 +42,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vimwiki/vimwiki'
 Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'tpope/vim-abolish'
 
 " Disabled causes performance issues
 " Plugin 'craigemery/vim-autotag'
@@ -136,7 +138,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -209,19 +211,19 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntastic 
+" => Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_php_checkers = ["php", "phpcs"] 
+let g:syntastic_php_checkers = ["php", "phpcs"]
 let g:syntastic_php_phpcs_args = "--standard=Symfony2"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin -> Pdv 
+" => Plugin -> Pdv
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 
@@ -232,9 +234,9 @@ let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 call expand_region#custom_text_objects({
       \ 'a]' :1,
       \ 'ab' :1,
-      \ 'aB' :1, 
+      \ 'aB' :1,
       \ 'ii' :0,
-      \ 'ai' :0, 
+      \ 'ai' :0,
       \ })
 
 if executable("ag")
@@ -243,8 +245,8 @@ if executable("ag")
 endif
 
 if has("gui_running")
-    if has("gui_macvim") 
-        set guifont=Monaco:h18
+    if has("gui_macvim")
+        set guifont=Monaco:h14
         set guioptions-=L
     endif
 endif
@@ -253,7 +255,7 @@ function! HasPaste()
     if &paste
         return 'PASTE MODE  '
     en
-    return '' 
+    return ''
 endfunction
 
 function! PhpSyntaxOverride()
