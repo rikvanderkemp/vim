@@ -44,7 +44,6 @@ Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'tpope/vim-abolish'
 Plugin 'bling/vim-airline'
-
 " Disabled causes performance issues
 " Plugin 'craigemery/vim-autotag'
 
@@ -225,6 +224,22 @@ let g:syntastic_php_phpcs_args = "--standard=Symfony2"
 " => Plugin -> Pdv
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" When root dir changes set VIM's cd to directory
+let NERDTreeChDirMode = 2
+
+" Hides "Press ? for help"
+let NERDTreeMinimalUI = 1
+
+" These prevent accidentally loading files while focused on NERDTree
+autocmd FileType nerdtree noremap <buffer> <c-left> <nop>
+autocmd FileType nerdtree noremap <buffer> <c-h> <nop>
+autocmd FileType nerdtree noremap <buffer> <c-right> <nop>
+autocmd FileType nerdtree noremap <buffer> <c-l> <nop>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Functions and checks :-)
