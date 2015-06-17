@@ -43,11 +43,10 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'tpope/vim-abolish'
+Plugin 'bling/vim-airline'
 
 " Disabled causes performance issues
 " Plugin 'craigemery/vim-autotag'
-
-Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 
@@ -194,11 +193,11 @@ set wrap "Wrap lines
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Status line
+" => Status line (deprecated in favour of airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set laststatus=2
+" set laststatus=2
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc settings
