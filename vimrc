@@ -15,35 +15,38 @@ set modelines=5
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'elzr/vim-json'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tobyS/pdv'
-Plugin 'tobyS/vmustache'
-Plugin 'SirVer/ultisnips'
-Plugin 'msanders/snipmate.vim'
-Plugin 'joonty/vim-sauce'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'adoy/vim-php-refactoring-toolbox'
-
-" Testing syntastic, disabled this on
-" Plugin 'joonty/vim-phpqa.git'
-
-Plugin 'tpope/vim-surround'
-Plugin 'rstacruz/sparkup'
-Plugin 'terryma/vim-expand-region'
-Plugin 'scrooloose/syntastic'
-Plugin 'vimwiki/vimwiki'
-Plugin 'docteurklein/vim-symfony'
 Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'tpope/vim-abolish'
 Plugin 'bling/vim-airline'
+Plugin 'docteurklein/vim-symfony'
+Plugin 'elzr/vim-json'
+Plugin 'gmarik/vundle.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'joonty/vim-sauce'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'lokaltog/vim-easymotion'
+Plugin 'msanders/snipmate.vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'rstacruz/sparkup'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'shougo/unite.vim'
+Plugin 'shougo/vimproc.vim'
+Plugin 'sirver/ultisnips'
+Plugin 'stanangeloff/php.vim'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tobys/pdv'
+Plugin 'tobys/vmustache'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vimwiki/vimwiki'
+Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jlanzarotta/bufexplorer'
 " Disabled causes performance issues
 " Plugin 'craigemery/vim-autotag'
 
@@ -244,6 +247,8 @@ autocmd FileType nerdtree noremap <buffer> <c-l> <nop>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Functions and checks :-)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set directory=~/.vimswp
+
 " Extend expand-selection behaviour like PHPStorm
 call expand_region#custom_text_objects({
       \ 'a]' :1,
@@ -281,4 +286,13 @@ function! PhpSyntaxOverride()
         autocmd!
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Goyo integration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
