@@ -15,6 +15,7 @@ set modelines=5
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'gmarik/Vundle.vim'
 Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'bling/vim-airline'
@@ -29,7 +30,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'lokaltog/vim-easymotion'
 Plugin 'msanders/snipmate.vim'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'rstacruz/sparkup'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'shougo/unite.vim'
@@ -47,6 +47,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'mattn/emmet-vim'
 " Disabled causes performance issues
 " Plugin 'craigemery/vim-autotag'
 
@@ -243,6 +244,7 @@ autocmd FileType nerdtree noremap <buffer> <c-left> <nop>
 autocmd FileType nerdtree noremap <buffer> <c-h> <nop>
 autocmd FileType nerdtree noremap <buffer> <c-right> <nop>
 autocmd FileType nerdtree noremap <buffer> <c-l> <nop>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Functions and checks :-)
